@@ -7343,5 +7343,7 @@ ul>li, ol>li {
 }
 
 code {
+  font-family: sans-serif, monospace;
+  background-color: #f2f2f2;
   margin: 0px 0.25em;
 }
