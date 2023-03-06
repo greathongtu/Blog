@@ -20,7 +20,11 @@ var loadImage = function (index) {
   let image = new Image();
   item.src = item.dataset.src;
   image.src = item.src;
+
   image.onload = function () {
+    loadImage(index + 1);
+  }
+  image.onerror = function () {
     loadImage(index + 1);
   }
 }
