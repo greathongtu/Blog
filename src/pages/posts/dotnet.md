@@ -50,13 +50,21 @@ namespace ConsoleApp1
       foreach (var type in types)
       {
         Console.WriteLine("Type: " + type.name);
+
+        var props = type.GetProperties();
+        foreach (var prop in props)
+        {
+          Console.WriteLine("\tProperty: " + prop.name);
+        }
       }
     }
   }
 
   public class Sample
   {
+    // This is Property
     public string Name { get; set; }
+    // This is Field
     public int Age;
 
     public void MyMethod() { }
@@ -69,4 +77,5 @@ namespace ConsoleApp1
 ConsoleApp1, Version=1.0.0.0 Culture=neutral, PublicKeyToken=null
 Type: Program
 Type: Sample
+        Property: Name
 ```
