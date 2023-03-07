@@ -1,7 +1,7 @@
 ---
 layout: '../../layouts/MarkdownPost.astro'
 title: '总结Effective C++'
-pubDate: 2023-03-14
+pubDate: 2023-03-04
 description: '第一篇Blog，写一下Effective C++的笔记。'
 author: 'Aaron'
 cover:

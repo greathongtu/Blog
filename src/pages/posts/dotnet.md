@@ -5,7 +5,7 @@ pubDate: 2023-03-07
 description: '总结C#所学如Attributes、Reflection'
 author: 'Aaron'
 cover:
-    url: '/preview/effective_cpp.jpg'
+    url: '/preview/dotnet.png'
     square: ''
     alt: 'cover'
 tags: ["dotnet"]
