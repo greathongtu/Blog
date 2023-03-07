@@ -35,6 +35,7 @@ public class Test
 
 # Reflection
 ```c#
+// Program.cs
 namespace ConsoleApp1
 {
   class Program
@@ -43,7 +44,22 @@ namespace ConsoleApp1
     {
       var assembly = Assembly.GetExecutingAssembly();
       Console.WriteLine(assembly.FullName);
+
+      // Types are just classes
+      var types = assembly.GetTypes();
+      foreach (var type in types)
+      {
+        Console.WriteLine("Type: " + type.name);
+      }
     }
+  }
+
+  public class Sample
+  {
+    public string Name { get; set; }
+    public int Age;
+
+    public void MyMethod() { }
   }
 }
 ```
@@ -51,4 +67,6 @@ namespace ConsoleApp1
 ```bash
 # output:
 ConsoleApp1, Version=1.0.0.0 Culture=neutral, PublicKeyToken=null
+Type: Program
+Type: Sample
 ```
