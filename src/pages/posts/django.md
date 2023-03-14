@@ -8,7 +8,7 @@ cover:
     url: '/preview/django.png'
     square: ''
     alt: 'cover'
-tags: ["python", "Django"]
+tags: ["python", "Django", "Web"]
 theme: 'light'
 featured: false
 ---
