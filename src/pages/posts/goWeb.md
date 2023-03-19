@@ -24,3 +24,31 @@ featured: false
 如果 enctype 是`multipart/form-data`，那么每一个 name-value 对都会被转换成一个MIME消息部分，每一个部分都有自己的 Content Type 和 Content Disposition
 
 
+# Gin
+```bash
+go mod init go_learning
+go get -u github.com/gin-gonic/gin
+```
+
+```go
+package main
+
+import (
+  "net/http"
+
+  "github.com/gin-gonic/gin"
+)
+
+func main() {
+  r := gin.Default()
+  r.GET("/ping", func(c *gin.Context) {
+    c.JSON(http.StatusOK, gin.H{
+      "message": "pong",
+    })
+  })
+  r.GET("/news", func(c *gin.Context) {
+	c.String(200, "Hello news!")
+  })
+  r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+}
+```
