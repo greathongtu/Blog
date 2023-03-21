@@ -52,3 +52,53 @@ func main() {
   r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }
 ```
+
+## gin 模板基本语法
+1. {{.}} 输出数据
+2. 变量 `{{$t := .title}}`
+3. 比较函数 `gt ge lt`
+4. 循环遍历：
+```html
+<ul>
+{{range $key, $value:=.hobby}}
+  <li>{{$key}} --- {{$value}}</li>
+{{else}}
+  <li>数组中没有数据</li>
+{{end}}
+</ul>
+```
+5. With
+
+before:
+```html
+<h4>{{.user.Name}}</h4>
+<h4>{{.user.Gender}}</h4>
+<h4>{{.user.Age}}</h4>
+```
+now:
+```html
+{{with .user}}
+<h4>{{.Name}}</h4>
+<h4>{{.Gender}}</h4>
+<h4>{{.Age}}</h4>
+{{end}}
+```
+
+6. 自定义模板函数：放在加载模板之前（LoadHTMLGlobal）
+
+```go
+r.SetFuncMap(template.FuncMap{
+		"UnixToTime":UnixToTime,
+})
+```
+
+7. 嵌套template
+
+8. 静态文件服务
+```go
+// 配置静态web目录，第一个参数表示路由，第二个参数表示映射的目录
+r.Static("/aaa", "./static")
+// static目录下一般放css, images, js
+```
+
+9. Get 传值
