@@ -2,7 +2,7 @@
 layout: '../../layouts/MarkdownPost.astro'
 title: 'Golang Web 学习'
 pubDate: 2022-04-18
-description: '很多Go web 学习'
+description: 'Go web、Gin 学习'
 author: 'Aaron'
 cover:
     url: 'https://lookcos.cn/usr/uploads/2022/04/2067928922.png'
@@ -101,4 +101,47 @@ r.Static("/aaa", "./static")
 // static目录下一般放css, images, js
 ```
 
-9. Get 传值
+9. Get 请求传值
+```go
+username := c.Query("username")
+page := c.DefaultQueryj("page", "1")
+```
+
+10. Post 请求传值获取form表单数据
+```go
+r.POST("/doAddUser", func(c *gin.Context) {
+  username := c.PostForm("username")
+  password := c.PostForm("password")
+  age := c.DefaultPostFormj("age", "20")
+
+  c.JSON(http.StatusOK, gin.H{
+    "username": username,
+    "password": password,
+  })
+})
+```
+
+11. 获取GET POST 传递的数据绑定到结构体 
+c.ShouldBind(&user)
+
+12. 路由分组 路由文件分离
+```go
+xxxRouters := r.Grop("/admin") {
+  xxxRouters.GET("/", func(c *gin.Context) {
+    c.String(200, "后台首页")
+  })
+}
+```
+
+13. 自定义控制器controller 及 控制器的继承
+
+14. Gin 中间件：开发者在处理请求的过程中加入用户自己的钩子（Hook）函数。如登录认证、权限校验、数据分页、记录日志、耗时统计等。
+r.GET可以加入不止一个回调func。
+c.Next() 调用该请求的剩余处理程序
+r.Use() 全局中间件
+
+15. 自定义model
+
+16. 文件上传
+
+17. cookie & session
