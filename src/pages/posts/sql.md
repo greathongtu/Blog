@@ -42,6 +42,8 @@ select * from s1 where key1 > 'z' AND key1 like '$a'
 
 ```sql
 # EXISTS 的实现相当于外表循环： A 表小用 exists， B表小用IN
+# EXISTS 先查外表； IN 先查内表
+# not in 和not exists：如果查询语句使用了not in，那么内外表都进行全表扫描，没有用到索引；而not extsts的子查询依然能用到表上的索引。所以无论那个表大，用not exists都比not in要快。
 select * from A where cc IN (SELECT cc from B)
 
 select * from A where EXISTS (select cc from B where B.cc =A.cc)
@@ -164,3 +166,4 @@ ReadView 整体操作流程：
 * 二进制日志（记录所有更改数据的语句（ddl，dml，没有查询的），用于主从服务器数据同步；服务器故障恢复，相比redo log，binlog是逻辑日志，redolog是物理日志）
 * 中继日志（relay log：用于主从服务器架构，从服务器用来存放主服务器bin log的一个中间文件）
 * 数据定义语句日志
+

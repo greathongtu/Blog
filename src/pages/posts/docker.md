@@ -37,7 +37,7 @@ docker pull mysql
 # check existing images
 docker images
 # name is whatever you like. first is host port, then docker port, -d is detached mode
-docker run --name mysql -p 80:80 -e MYSQL_ROOT_PASSWORD=123456 mysql
+docker run --name mysql -p 3306:3306 -v host_volume:docker_volume -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 
 # find docker id of the container
 docker ps
@@ -57,4 +57,16 @@ select * from department limit 100;
 
 drop table department;
 drop database yaojun
+```
+
+## 结合 tmux 使用：
+
+```bash
+tmux new -s <session-name>
+# C-b d 退出
+
+# 重新连接
+tmux attach -t jk / mysql
+
+
 ```
