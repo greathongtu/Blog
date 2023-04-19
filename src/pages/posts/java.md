@@ -5,7 +5,7 @@ pubDate: 2023-04-08
 description: '学习Jvm 等知识总结'
 author: 'Aaron'
 cover:
-    url: '/preview/wsl.jpg'
+    url: '/preview/javapic.png'
     alt: 'cover'
 tags: ["Java", "Jvm"]
 theme: 'light'
