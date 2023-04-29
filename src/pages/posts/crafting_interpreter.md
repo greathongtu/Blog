@@ -17,6 +17,18 @@ featured: false
 然后将 token 转换成 ast (解析表达式).
 递归下降分析（recursive descent）：自顶向下解析器
 
+program        → declaration* EOF ;
+
+declaration    → varDecl  (就是 "var" IDENTIFIER ( "=" expression )? ";")
+               | statement ;
+
+statement      → exprStmt
+               | printStmt ;
+
+exprStmt       → expression ";" ;
+printStmt      → "print" expression ";" ;
+
+
 expression     → equality ;
 
 equality       → comparison ( ( "!=" | "==" ) comparison )* ;
@@ -32,16 +44,6 @@ unary          → ( "!" | "-" ) unary
 
 primary        → NUMBER | STRING | "true" | "false" | "nil"
                | "(" expression ")" ;
-
-## Statement
-program        → statement* EOF ;
-
-statement      → exprStmt
-               | printStmt ;
-
-exprStmt       → expression ";" ;
-printStmt      → "print" expression ";" ;
-
 
 ## Visitor Pattern
 
@@ -78,3 +80,27 @@ class Beignet extends Pastry {
 // now we call Visitor2 的 visitorElementB 方法。或者说 visitBeignet 方法 
 ```
 
+
+声明一个变量的规则如下：
+varDecl        → "var" IDENTIFIER ( "=" expression )? ";" ;
+
+注意： primary 里要加上一个 identifier
+
+## assignment
+expression     → assignment ;
+assignment     → IDENTIFIER "=" assignment
+               | equality ;
+
+需要修改 error API:
+在 parse 出现错误的时候，我们需要报告错误，但
+1. 不 abort 整个程序，
+2. 同时不再继续进行 interpreter
+解决办法： 在 parser 中新增 had_error bool 变量
+
+## 8.5.2 Block
+
+statement      → exprStmt
+               | printStmt
+               | block ;
+
+block          → "{" declaration* "}" ;
