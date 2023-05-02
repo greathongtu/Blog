@@ -23,13 +23,31 @@ declaration    → varDecl  (就是 "var" IDENTIFIER ( "=" expression )? ";")
                | statement ;
 
 statement      → exprStmt
-               | printStmt ;
+               | forStmt
+               | ifStmt
+               | printStmt
+               | whileStmt
+               | block ;
+
+whileStmt      → "while" "(" expression ")" statement ;
+
+forStmt        → "for" "(" ( varDecl | exprStmt | ";" )
+                 expression? ";"
+                 expression? ")" statement ;
+
+ifStmt         → "if" "(" expression ")" statement
+               ( "else" statement )? ;
+
+block          → "{" declaration* "}" ;
 
 exprStmt       → expression ";" ;
 printStmt      → "print" expression ";" ;
 
-
-expression     → equality ;
+expression     → assignment ;
+assignment     → IDENTIFIER "=" assignment
+               | logic_or ;
+logic_or       → logic_and ( "or" logic_and )* ;
+logic_and      → equality ( "and" equality )* ;
 
 equality       → comparison ( ( "!=" | "==" ) comparison )* ;
 
@@ -53,7 +71,7 @@ class Beignet extends Pastry {}
 class Cruller extends Pastry {}
 
 // Each operation that can be performed on pastries is a new class that implements the interface
-// xxxVisitor means operations
+// xxxVisitor means operations to xxx(base). visitXXX means real operation. param is XXX(derived)
 interface PastryVisitor {
     void visitBeignet(Beignet beignet); 
     void visitCruller(Cruller cruller);
@@ -104,3 +122,6 @@ statement      → exprStmt
                | block ;
 
 block          → "{" declaration* "}" ;
+
+# question
+为什么多加一层间接性就不会循环引用了
