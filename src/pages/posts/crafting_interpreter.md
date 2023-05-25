@@ -1,6 +1,6 @@
 ---
 layout: '../../layouts/MarkdownPost.astro'
-title: 'Rust 学习'
+title: 'Lox interpreter'
 pubDate: 2023-04-23
 description: '使用 Rust 实现 lox 解释器'
 author: 'Aaron'
@@ -57,8 +57,10 @@ term           → factor ( ( "-" | "+" ) factor )* ;
 
 factor         → unary ( ( "/" | "*" ) unary )* ;
 
-unary          → ( "!" | "-" ) unary
-               | primary ;
+unary          → ( "!" | "-" ) unary | call ;
+call           → primary ( "(" arguments? ")" )* ;
+
+arguments      → expression ( "," expression )* ;`
 
 primary        → NUMBER | STRING | "true" | "false" | "nil"
                | "(" expression ")" ;

@@ -22,19 +22,21 @@ featured: false
 
 ### chrome 下载
 
-### alacritty 下载
+### alacritty zellij 下载
 
 ### zsh 配置 (without oh-my-zsh)
-设置 http_proxy
+[https://github.com/zap-zsh/zap](https://github.com/zap-zsh/zap)
+export https_proxy=http://127.0.0.1:7890
+http_proxy=http://127.0.0.1:7890
+all_proxy=socks5://127.0.0.1:7890
+
 可以考虑存一个 dotfile 在 github
 
 ### vscode 下载
 
 ### git clone项目 依赖下载
 
-### zed 下载(尝鲜)
-
-### intellij 下载
+### docker intellij 下载
 
 ### tbc
 
